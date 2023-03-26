@@ -1,0 +1,115 @@
+One of the important prerequisites to configure IIDR with Oracle source database correctly is to create a dedicated schema GSIIDR
+Below you can find a list of required privileges that should be provided to the GSIIDR schema 
+
+--This script does not grant dba to the cdc user.
+
+-- create user
+-- CREATE user gsiidr identified by <password> 
+-- default tablespace <tablespace_name> temporary tablespace <temporary_tablespace_name>;
+
+-- Grant basic roles
+grant connect to gsiidr;
+grant resource to gsiidr;
+grant select_catalog_role to gsiidr;
+grant unlimited tablespace to gsiidr;
+
+-- Table DDL permissions
+grant create any table to gsiidr;
+grant alter any table to gsiidr;
+grant drop any table to gsiidr;
+grant lock any table to gsiidr;
+
+-- Table DML permissions
+grant select any table to gsiidr;
+grant flashback any table to gsiidr;
+grant insert any table to gsiidr;
+grant update any table to gsiidr;
+grant delete any table to gsiidr;
+
+-- Index and view DDL permissions
+grant create any index to gsiidr;
+grant alter any index to gsiidr;
+grant drop any index to gsiidr;
+grant create any view to gsiidr;
+grant drop any view to gsiidr;
+
+-- Trigger DDL and DML permissions (only required for CDC Trigger-based)
+grant create any trigger to gsiidr;
+grant alter any trigger to gsiidr;
+grant drop any trigger to gsiidr;
+
+-- Sequence DDL and DML permissions (only required for CDC Trigger-based)
+grant create any sequence to gsiidr;
+grant select any sequence to gsiidr;
+
+-- Procedure permissions
+grant create any procedure to gsiidr;
+grant execute any procedure to gsiidr;
+
+-- Permission to perform select on the v_$ tables
+grant select any dictionary to gsiidr;
+
+-- General system views
+grant select on sys.v_$database to gsiidr;
+grant select on sys.v_$controlfile to gsiidr;
+grant select on sys.v_$version to gsiidr;
+grant select on sys.nls_database_parameters to gsiidr;
+
+-- Archive and redo logs
+grant select on sys.v_$log to gsiidr;
+grant select on sys.v_$logfile to gsiidr;
+grant select on sys.v_$archived_log to gsiidr;
+grant select on sys.v_$log_history to gsiidr;
+
+-- Sessions and transactions
+grant alter session to gsiidr;
+grant select on sys.v_$session to gsiidr;
+grant select on sys.gv_$session to gsiidr;
+grant select on sys.v_$transaction to gsiidr;
+grant select on sys.v_$mystat to gsiidr;
+
+-- Tables, indexes, columns and related views
+grant select on sys.all_coll_types to gsiidr;
+grant select on sys.all_type_attrs to gsiidr;
+grant select on sys.dba_tables to gsiidr;
+grant select on sys.dba_tab_comments to gsiidr;
+grant select on sys.dba_tab_columns to gsiidr;
+grant select on sys.dba_col_comments to gsiidr;
+grant select on sys.dba_indexes to gsiidr;
+grant select on sys.dba_ind_columns to gsiidr;
+grant select on sys.all_constraints to gsiidr;
+grant select on sys.dba_constraints to gsiidr;
+grant select on sys.all_cons_columns to gsiidr;
+grant select on sys.dba_cons_columns to gsiidr;
+grant select on sys.tab$ to gsiidr;
+grant select on sys.ind$ to gsiidr;
+grant select on sys.lob$ to gsiidr;
+grant select on sys.col$ to gsiidr;
+grant select on sys.icol$ to gsiidr;
+grant select on sys.coltype$ to gsiidr;
+grant select on sys.attrcol$ to gsiidr;
+grant select on sys.ccol$ to gsiidr;
+grant select on sys.cdef$ to gsiidr;
+
+-- Miscellaneous other objects
+grant select on sys.obj$ to gsiidr;
+grant select on sys.dba_mviews to gsiidr;
+grant select on sys.dba_objects to gsiidr;
+grant select on sys.dba_sequences to gsiidr;
+grant select on sys.hist_head$ to gsiidr;
+grant select on sys.resource_cost to gsiidr;
+
+-- Storage
+grant select on sys.dba_tablespaces to gsiidr;
+grant select on sys.dba_rollback_segs to gsiidr;
+
+-- Permissions
+grant select on sys.dba_users to gsiidr;
+grant select on sys.dba_sys_privs to gsiidr;
+grant select on sys.dba_tab_privs to gsiidr;
+grant select on sys.dba_profiles to gsiidr;
+grant select on sys.dba_roles to gsiidr;
+grant select on sys.user$ to gsiidr;
+grant select on user_role_privs to gsiidr;
+
+exit;
